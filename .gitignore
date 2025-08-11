@@ -1,0 +1,27 @@
+# Playwright specific
+test-results/
+playwright-report/
+playwright/.cache/
+/blob-report/
+/artifacts/
+
+# Allure specific
+allure-results/
+allure-report/
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment variables
+.env
+.env.local
+
+
+# Test artifacts
+screenshots/
+videos/
+
+# System files
+.DS_Store
+Thumbs.db
