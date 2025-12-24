@@ -303,8 +303,17 @@ async rightClick(locator) {
             
             await this.page.waitForTimeout(5000);
             
+            // Validate targetText parameter
+            if (!targetText) {
+                console.error('targetText parameter is required');
+                return false;
+            }
+            
             // Get all elements matching the locator
             const elements = await this.page.locator(locator).all();
+            
+            // Normalize targetText
+            const normalizedTargetText = targetText.trim();
             
             // Iterate through elements to find text match
             for (const element of elements) {
@@ -313,8 +322,8 @@ async rightClick(locator) {
                 
                 // Check for text match (exact or partial)
                 const isMatch = exactMatch 
-                    ? trimmedText === targetText.trim()
-                    : trimmedText.includes(targetText.trim());
+                    ? trimmedText === normalizedTargetText
+                    : trimmedText.includes(normalizedTargetText);
                 
                 if (isMatch) {
                     // Click on the matching element

@@ -1,16 +1,23 @@
 const { test,expect,chromium} = require('@playwright/test');
 const { getEnvData } = require('../utils/envLoader');
-const env = process.env.TEST_ENV || 'qa';
-const testdata = getEnvData(env);
 
 export let page;
 export let context;
+export let testData;
 
 test.beforeAll(async () => {
   console.log('Global setup before all tests...');
+  
+  // Capture the environment from process.env.TEST_ENV
+  const env = process.env.TEST_ENV || 'qa';
+  console.log(`The environment used is ${env}`);
+  
+  // Load test data based on environment and set as global variable
+  testData = getEnvData(env);
+  console.log('Test data loaded successfully for environment:', env);
+  
   // Perform any setup tasks needed for the test suite, e.g., initializing a server
   console.log("Connected to data base..")
-  console.log(`The environment used is ${env} and ${process.env.ENV}`)
 });
 
 test.beforeEach(async ({browser}) => {
@@ -19,7 +26,7 @@ test.beforeEach(async ({browser}) => {
   
   context=await browser.newContext()
   page=await context.newPage()
-  await page.goto(testdata.BaseURL);
+  await page.goto(testData.BaseURL);
 });
 
 test.afterEach(async () => {

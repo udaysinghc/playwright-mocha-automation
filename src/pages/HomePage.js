@@ -28,7 +28,7 @@ export class HomePage extends BasePage {
     async checkProductAddToCart(productName)
     {
         await this.actions.click(this.cartButton);
-        await this.page.locator(this.addedProduct).waitFor({ state: 'visible' , timeout: 10000 });
+        await this.page.locator(this.addedProduct).first().waitFor({ state: 'visible' , timeout: 10000 });
         const product=await this.page.locator(this.addedProduct).textContent();
         return product === productName;
     }

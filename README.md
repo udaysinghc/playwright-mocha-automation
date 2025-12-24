@@ -35,6 +35,7 @@ cd PlaywrightFrameWork
 3. Install dependencies:
 ```bash
 npm install
+npm playwright install
 ```
 
 4. Install Allure CLI globally (optional, for local development):
